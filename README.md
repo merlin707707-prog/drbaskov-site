@@ -6,6 +6,9 @@ drbaskov.ru купил 12.07.26 на REG.RU за 169 руб
 
 Astro-сайт: лендинг + блог из Markdown. Проверен сборкой (Astro 5).
 
+
+https://github.com/merlin707707-prog/drbaskov-site
+
 ## Структура
 
 ```
