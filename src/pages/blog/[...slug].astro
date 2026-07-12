@@ -1,0 +1,23 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const fmt = (d: Date) => d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+<Base title={`${post.data.title} — Владислав Басков`} description={post.data.description}>
+  <div class="page-head wrap prose">
+    <div class="meta">{fmt(post.data.date)}{post.data.tags.length > 0 && ` · ${post.data.tags.join(' · ')}`}</div>
+    <h1>{post.data.title}</h1>
+  </div>
+  <article class="wrap prose">
+    <Content />
+    <p style="margin-top:48px"><a class="btn" href="/#contact">Записаться на приём</a></p>
+  </article>
+</Base>

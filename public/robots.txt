@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://drbaskov.ru/sitemap-index.xml

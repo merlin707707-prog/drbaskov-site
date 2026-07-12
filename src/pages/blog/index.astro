@@ -1,0 +1,28 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const fmt = (d: Date) => d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+<Base title="Статьи — Владислав Басков, врач-психотерапевт" description="Статьи о психотерапии, схематерапии, юнгианском анализе и гипнотерапии.">
+  <div class="page-head wrap">
+    <div class="eyebrow">Блог</div>
+    <h2 class="title">Статьи о психотерапии</h2>
+    <p class="sub">О том, как устроена психика, и что с этим делать.</p>
+  </div>
+  <div class="wrap" style="padding-bottom:96px">
+    <div class="post-list">
+      {posts.map((post) => (
+        <a class="post-item" href={`/blog/${post.id}/`}>
+          <div class="meta">{fmt(post.data.date)}{post.data.tags.length > 0 && ` · ${post.data.tags.join(' · ')}`}</div>
+          <h3>{post.data.title}</h3>
+          {post.data.description && <p>{post.data.description}</p>}
+        </a>
+      ))}
+      {posts.length === 0 && <p class="sub">Скоро здесь появятся статьи.</p>}
+    </div>
+  </div>
+</Base>

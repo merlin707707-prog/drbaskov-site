@@ -1,0 +1,63 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description = 'Владислав Басков — врач-психотерапевт. Схематерапия, юнгианский анализ, гипнотерапия. Приём в Москве и онлайн.' } = Astro.props;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Physician',
+  name: 'Владислав Басков',
+  medicalSpecialty: 'Psychiatric',
+  description: 'Врач-психотерапевт: схематерапия, юнгианский анализ, гипнотерапия, интегративный подход',
+  address: { '@type': 'PostalAddress', streetAddress: 'ул. Маросейка, 9/2', addressLocality: 'Москва', addressCountry: 'RU' },
+  telephone: '+79772514879',
+  priceRange: '4000–6000 RUB',
+  url: 'https://drbaskov.ru'
+};
+---
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="ru_RU" />
+  <link rel="sitemap" href="/sitemap-index.xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+</head>
+<body>
+  <nav>
+    <div class="wrap">
+      <a class="logo" href="/">Dr.<span>Басков</span></a>
+      <ul>
+        <li><a href="/#methods">Методы</a></li>
+        <li><a href="/#process">Как проходит</a></li>
+        <li><a href="/#about">Обо мне</a></li>
+        <li><a href="/#pricing">Стоимость</a></li>
+        <li><a href="/blog/">Статьи</a></li>
+      </ul>
+      <a class="btn nav-cta" href="/#contact">Записаться</a>
+    </div>
+  </nav>
+
+  <slot />
+
+  <footer>
+    <div class="wrap">
+      <span>© {new Date().getFullYear()} Владислав Басков · врач-психотерапевт</span>
+      <span>Не является публичной офертой · <a href="/privacy/">Политика конфиденциальности</a></span>
+    </div>
+  </footer>
+</body>
+</html>
