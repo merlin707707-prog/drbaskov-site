@@ -101,14 +101,24 @@
       const sc = T.scales[key];
       let sum = 0;
       const rev = T.reverse || [];
+      const map = T.valueMap || null;          // нелинейный подсчёт (например, EAT-26)
       sc.items.forEach(function (n) {
-        let a = answers[n - 1] == null ? 0 : answers[n - 1];
-        if (rev.indexOf(n) !== -1) a = VMAX + VS - a;  // обратный пункт
+        const raw = answers[n - 1];
+        if (raw == null) return;
+        let a;
+        if (map) {
+          const idx = raw - VS;
+          a = (rev.indexOf(n) !== -1 && T.reverseMap) ? T.reverseMap[idx] : map[idx];
+        } else {
+          a = (rev.indexOf(n) !== -1) ? VMAX + VS - raw : raw;
+        }
         sum += a;
       });
+      const unitMax = map ? Math.max.apply(null, map) : VMAX;
+      const unitMin = map ? Math.min.apply(null, map) : VS;
       const val = SUM ? sum : sum / sc.items.length;
-      const min = SUM ? VS * sc.items.length : VS;
-      const max = SUM ? VMAX * sc.items.length : VMAX;
+      const min = SUM ? unitMin * sc.items.length : unitMin;
+      const max = SUM ? unitMax * sc.items.length : unitMax;
       return { key: key, name: sc.name, group: sc.group || '', positive: !!sc.positive,
         mean: Math.round(val * 100) / 100, min: min, max: max };
     });
