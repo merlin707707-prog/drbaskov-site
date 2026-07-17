@@ -2,6 +2,9 @@
 (function () {
   const T = window.TEST_CONFIG;
   if (!T) return;
+  const VS = T.valueStart == null ? 1 : T.valueStart;           // первое значение шкалы
+  const VMAX = VS + T.scaleLabels.length - 1;                   // последнее значение шкалы
+  const SUM = T.scoring === 'sum';                              // подсчёт суммой (PHQ-9) или средним
   const root = document.getElementById('test-root');
   const LS_PROG = 'test_' + T.id + '_progress';
   const LS_HIST = 'test_' + T.id + '_history';
@@ -72,7 +75,7 @@
       '<div class="t-count">' + (idx + 1) + ' / ' + T.items.length + '</div>' +
       '<p class="t-question">' + esc(item.text) + '</p>' +
       '<div class="t-scale">' + T.scaleLabels.map(function (lab, i) {
-        const v = i + 1;
+        const v = VS + i;
         const sel = answers[idx] === v ? ' selected' : '';
         return '<button class="t-opt' + sel + '" data-v="' + v + '"><b>' + v + '</b><span>' + lab + '</span></button>';
       }).join('') + '</div>' +
@@ -97,9 +100,12 @@
     return Object.keys(T.scales).map(function (key) {
       const sc = T.scales[key];
       let sum = 0;
-      sc.items.forEach(function (n) { sum += answers[n - 1] || 0; });
-      const mean = sum / sc.items.length;
-      return { key: key, name: sc.name, group: sc.group || '', positive: !!sc.positive, mean: Math.round(mean * 100) / 100 };
+      sc.items.forEach(function (n) { sum += (answers[n - 1] == null ? 0 : answers[n - 1]); });
+      const val = SUM ? sum : sum / sc.items.length;
+      const min = SUM ? VS * sc.items.length : VS;
+      const max = SUM ? VMAX * sc.items.length : VMAX;
+      return { key: key, name: sc.name, group: sc.group || '', positive: !!sc.positive,
+        mean: Math.round(val * 100) / 100, min: min, max: max };
     });
   }
 
@@ -129,11 +135,16 @@
       groups[g].sort(function (a, b) { return b.mean - a.mean; });
       groups[g].forEach(function (s) {
         const bd = band(s.mean, s.positive);
-        const w = Math.round((s.mean - 1) / 5 * 100);
+        const w = Math.round((s.mean - s.min) / (s.max - s.min) * 100);
+        const valTxt = SUM ? (s.mean + ' из ' + s.max) : s.mean.toFixed(2);
         html += '<div class="t-res-row"><div class="t-res-head"><span>' + s.name + '</span>' +
-          '<span class="t-res-val" style="color:' + bd.color + '">' + s.mean.toFixed(2) + ' · ' + bd.label + '</span></div>' +
+          '<span class="t-res-val" style="color:' + bd.color + '">' + valTxt + ' · ' + bd.label + '</span></div>' +
           '<div class="t-res-bar"><div style="width:' + Math.max(w, 2) + '%;background:' + bd.color + '"></div></div></div>';
       });
+    });
+    if (T.flags) T.flags.forEach(function (f) {
+      const a = rec.answers[f.item - 1];
+      if (a != null && a >= f.min) html += '<div class="t-alert">' + f.html + '</div>';
     });
     html += '<div class="t-disclaimer" style="margin-top:28px">' + T.resultNote + '</div>';
     html += '<div class="t-actions">' +
@@ -145,9 +156,10 @@
     document.getElementById('t-download').onclick = function () {
       let txt = T.title + '\r\nДата: ' + rec.date + '\r\nСайт: https://drbaskov.ru\r\n\r\n';
       rec.scales.forEach(function (s) {
-        txt += (s.group ? '[' + s.group + '] ' : '') + s.name + ': ' + s.mean.toFixed(2) + ' (' + band(s.mean, s.positive).label + ')\r\n';
+        const v = SUM ? (s.mean + ' из ' + s.max) : s.mean.toFixed(2);
+        txt += (s.group ? '[' + s.group + '] ' : '') + s.name + ': ' + v + ' (' + band(s.mean, s.positive).label + ')\r\n';
       });
-      txt += '\r\nШкала: средний балл от 1 до 6.\r\nЭто скрининговая самодиагностика, не медицинский диагноз.\r\n';
+      txt += '\r\nЭто скрининговая самодиагностика, не медицинский диагноз.\r\n';
       const blob = new Blob(['﻿' + txt], { type: 'text/plain;charset=utf-8' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);

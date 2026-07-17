@@ -119,6 +119,8 @@ h2.title{font-size:clamp(30px,3.8vw,42px);max-width:640px}
 .t-history h3{font-size:17px;margin-bottom:10px}
 .t-hist-item{display:block;color:var(--gold);font-size:14px;padding:5px 0;text-decoration:none}
 .t-group{font-size:19px;color:var(--gold);margin:26px 0 12px}
+.t-alert{margin-top:22px;padding:16px 18px;border:1px solid #c95b5b;background:rgba(201,91,91,.08);font-size:14.5px;color:var(--ink);line-height:1.6}
+.t-alert a{color:var(--gold)}
 .t-res-row{margin-bottom:14px}
 .t-res-head{display:flex;justify-content:space-between;font-size:14.5px;margin-bottom:5px;gap:12px}
 .t-res-val{white-space:nowrap;font-size:13px}
