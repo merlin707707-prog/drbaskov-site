@@ -100,7 +100,12 @@
     return Object.keys(T.scales).map(function (key) {
       const sc = T.scales[key];
       let sum = 0;
-      sc.items.forEach(function (n) { sum += (answers[n - 1] == null ? 0 : answers[n - 1]); });
+      const rev = T.reverse || [];
+      sc.items.forEach(function (n) {
+        let a = answers[n - 1] == null ? 0 : answers[n - 1];
+        if (rev.indexOf(n) !== -1) a = VMAX + VS - a;  // обратный пункт
+        sum += a;
+      });
       const val = SUM ? sum : sum / sc.items.length;
       const min = SUM ? VS * sc.items.length : VS;
       const max = SUM ? VMAX * sc.items.length : VMAX;
