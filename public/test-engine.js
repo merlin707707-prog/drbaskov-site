@@ -120,7 +120,7 @@
       const min = SUM ? unitMin * sc.items.length : unitMin;
       const max = SUM ? unitMax * sc.items.length : unitMax;
       return { key: key, name: sc.name, group: sc.group || '', positive: !!sc.positive,
-        mean: Math.round(val * 100) / 100, min: min, max: max };
+        mean: Math.round(val * 100) / 100, min: min, max: max, bands: sc.bands || null };
     });
   }
 
@@ -135,10 +135,11 @@
     results(rec, false);
   }
 
-  function band(mean, positive) {
-    for (const b of T.bands) { if (mean < b.max) return positive ? b.pos : b; }
-    const last = T.bands[T.bands.length - 1];
-    return positive ? last.pos : last;
+  function band(mean, positive, custom) {
+    const bands = custom || T.bands;
+    for (const b of bands) { if (mean < b.max) return positive ? (b.pos || b) : b; }
+    const last = bands[bands.length - 1];
+    return positive ? (last.pos || last) : last;
   }
 
   function results(rec, fromHistory) {
@@ -149,7 +150,7 @@
       if (g) html += '<h3 class="t-group">' + g + '</h3>';
       groups[g].sort(function (a, b) { return b.mean - a.mean; });
       groups[g].forEach(function (s) {
-        const bd = band(s.mean, s.positive);
+        const bd = band(s.mean, s.positive, s.bands);
         const w = Math.round((s.mean - s.min) / (s.max - s.min) * 100);
         const valTxt = SUM ? (s.mean + ' из ' + s.max) : s.mean.toFixed(2);
         html += '<div class="t-res-row"><div class="t-res-head"><span>' + s.name + '</span>' +
@@ -172,7 +173,7 @@
       let txt = T.title + '\r\nДата: ' + rec.date + '\r\nСайт: https://drbaskov.ru\r\n\r\n';
       rec.scales.forEach(function (s) {
         const v = SUM ? (s.mean + ' из ' + s.max) : s.mean.toFixed(2);
-        txt += (s.group ? '[' + s.group + '] ' : '') + s.name + ': ' + v + ' (' + band(s.mean, s.positive).label + ')\r\n';
+        txt += (s.group ? '[' + s.group + '] ' : '') + s.name + ': ' + v + ' (' + band(s.mean, s.positive, s.bands).label + ')\r\n';
       });
       txt += '\r\nЭто скрининговая самодиагностика, не медицинский диагноз.\r\n';
       const blob = new Blob(['﻿' + txt], { type: 'text/plain;charset=utf-8' });
