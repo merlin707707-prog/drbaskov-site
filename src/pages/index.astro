@@ -222,7 +222,8 @@ import Base from '../layouts/Base.astro';
 
   <script is:inline>
   (function(){
-    var ENDPOINT = 'https://formsubmit.co/ajax/merlin707@mail.ru';
+    var ENDPOINT = 'https://docs.google.com/forms/d/e/1FAIpQLSfM7WjxLrxVWlCqsq1tqInaqv4GRQlMCFhXFDBu63bSjBzwvg/formResponse';
+    var FIELDS = { name: 'entry.1342443082', phone: 'entry.1763188563', email: 'entry.331657059', topic: 'entry.1358747652', message: 'entry.1207341694' };
     var f = document.getElementById('bookform');
     var st = document.getElementById('bform-status');
     f.addEventListener('submit', function(e){
@@ -231,20 +232,15 @@ import Base from '../layouts/Base.astro';
       if(!document.getElementById('bform-agree').checked){ st.textContent = 'Нужно согласие на обработку данных.'; return; }
       if(f.botcheck.checked) return;
       st.textContent = 'Отправляю…';
-      fetch(ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          _subject: 'Заявка с drbaskov.ru: ' + (f.topic.value || 'консультация'),
-          _template: 'table',
-          _captcha: 'false',
-          'Имя': f.name.value, 'Телефон': f.phone.value, 'Почта': f.email.value,
-          'Тема': f.topic.value, 'Дополнительно': f.message.value
-        })
-      }).then(function(r){ return r.json(); }).then(function(d){
-        if(d.success === 'true' || d.success === true){ f.reset(); st.textContent = 'Спасибо! Заявка отправлена — я свяжусь с вами в течение дня.'; }
-        else { st.textContent = 'Не получилось отправить. Напишите, пожалуйста, в WhatsApp или Telegram.'; }
-      }).catch(function(){ st.textContent = 'Не получилось отправить. Напишите, пожалуйста, в WhatsApp или Telegram.'; });
+      var body = new URLSearchParams();
+      body.append(FIELDS.name, f.name.value);
+      body.append(FIELDS.phone, f.phone.value);
+      body.append(FIELDS.email, f.email.value);
+      body.append(FIELDS.topic, f.topic.value);
+      body.append(FIELDS.message, f.message.value);
+      fetch(ENDPOINT, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body.toString() })
+        .then(function(){ f.reset(); st.textContent = 'Спасибо! Заявка отправлена — я свяжусь с вами в течение дня.'; })
+        .catch(function(){ st.textContent = 'Не получилось отправить. Напишите, пожалуйста, в WhatsApp или Telegram.'; });
     });
   })();
   </script>
