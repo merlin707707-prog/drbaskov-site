@@ -203,7 +203,51 @@ import Base from '../layouts/Base.astro';
       <span>Телефон: <a href="tel:+79772514879">+7 977 251-48-79</a> (сообщения: WhatsApp, Telegram, MAX)</span>
       <span>Приём: Москва — м. Китай-город (Маросейка, 9/2) · м. Ховрино</span>
     </div>
+
+    <form id="bookform" class="bform" novalidate>
+      <h3>Или оставьте заявку — отвечу в течение дня</h3>
+      <div class="bform-grid">
+        <input type="text" name="name" placeholder="Ваше имя *" required />
+        <input type="tel" name="phone" placeholder="Телефон" />
+        <input type="email" name="email" placeholder="Электронная почта *" required />
+        <input type="text" name="topic" placeholder="Тема или кратко о проблеме" />
+      </div>
+      <textarea name="message" rows="3" placeholder="Дополнительная информация: удобное время, дни недели, формат (очно/онлайн)…"></textarea>
+      <input type="checkbox" name="botcheck" class="bform-hp" tabindex="-1" autocomplete="off" />
+      <label class="bform-consent"><input type="checkbox" id="bform-agree" required /> <span>Согласен на обработку персональных данных (<a href="/privacy/">политика конфиденциальности</a>)</span></label>
+      <button type="submit" class="t-btn solid">Отправить заявку</button>
+      <p id="bform-status" aria-live="polite"></p>
+    </form>
   </div>
+
+  <script is:inline>
+  (function(){
+    var KEY = 'W3F_KEY_HERE'; // ключ Web3Forms
+    var f = document.getElementById('bookform');
+    var st = document.getElementById('bform-status');
+    f.addEventListener('submit', function(e){
+      e.preventDefault();
+      if(!f.name.value.trim() || !f.email.value.trim()){ st.textContent = 'Пожалуйста, заполните имя и почту.'; return; }
+      if(!document.getElementById('bform-agree').checked){ st.textContent = 'Нужно согласие на обработку данных.'; return; }
+      if(f.botcheck.checked) return;
+      st.textContent = 'Отправляю…';
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          access_key: KEY,
+          subject: 'Заявка с drbaskov.ru: ' + (f.topic.value || 'консультация'),
+          from_name: 'Сайт drbaskov.ru',
+          'Имя': f.name.value, 'Телефон': f.phone.value, 'Почта': f.email.value,
+          'Тема': f.topic.value, 'Дополнительно': f.message.value
+        })
+      }).then(function(r){ return r.json(); }).then(function(d){
+        if(d.success){ f.reset(); st.textContent = 'Спасибо! Заявка отправлена — я свяжусь с вами в течение дня.'; }
+        else { st.textContent = 'Не получилось отправить. Напишите, пожалуйста, в WhatsApp или Telegram.'; }
+      }).catch(function(){ st.textContent = 'Не получилось отправить. Напишите, пожалуйста, в WhatsApp или Telegram.'; });
+    });
+  })();
+  </script>
 </section>
 
 </Base>

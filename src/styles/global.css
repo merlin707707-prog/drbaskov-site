@@ -155,6 +155,20 @@ details p{color:var(--ink-dim);margin-top:14px;max-width:720px;font-size:15px}
 .contact-line{margin-top:36px;display:flex;gap:28px;justify-content:center;flex-wrap:wrap;font-size:14px;color:var(--ink-dim)}
 .contact-line a{color:var(--gold);text-decoration:none}
 
+/* BOOKING FORM */
+.bform{max-width:640px;margin:52px auto 0;text-align:left;background:var(--bg-2);border:1px solid rgba(255,255,255,.07);padding:32px}
+.bform h3{font-size:21px;margin-bottom:20px;text-align:center}
+.bform-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.bform input[type=text],.bform input[type=tel],.bform input[type=email],.bform textarea{width:100%;background:var(--bg);border:1px solid rgba(255,255,255,.12);color:var(--ink);padding:13px 14px;font-family:var(--sans);font-size:14.5px;outline:none;box-sizing:border-box}
+.bform input:focus,.bform textarea:focus{border-color:var(--gold)}
+.bform textarea{margin-top:12px;resize:vertical}
+.bform-hp{display:none}
+.bform-consent{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:var(--ink-dim);margin:16px 0}
+.bform-consent a{color:var(--gold)}
+.bform button{width:100%}
+#bform-status{margin-top:14px;font-size:14px;color:var(--gold);text-align:center;min-height:20px}
+@media(max-width:860px){.bform-grid{grid-template-columns:1fr}}
+
 /* FOOTER */
 footer{border-top:1px solid rgba(255,255,255,.06);padding:36px 0;font-size:13px;color:var(--ink-dim)}
 footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
