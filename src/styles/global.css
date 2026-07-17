@@ -197,9 +197,14 @@ footer a{color:var(--ink-dim)}
 
 @media(max-width:860px){
   .hero .wrap{grid-template-columns:1fr}
-  .portrait{display:none}
+  .hero{padding-top:120px}
+  .portrait{display:block;justify-self:center;margin-top:12px}
+  .portrait .frame{width:280px;height:319px}
   .grid-3,.steps,.p-cards{grid-template-columns:1fr}
   .about-grid{grid-template-columns:1fr;gap:36px}
-  nav ul{display:none}
+  nav .wrap{flex-wrap:wrap;height:auto;padding-top:10px;padding-bottom:8px;row-gap:4px}
+  nav ul{display:flex;flex-wrap:wrap;order:3;width:100%;justify-content:center;gap:4px 16px;padding:4px 0 2px}
+  nav ul a{font-size:12.5px}
+  .nav-cta{font-size:11px;padding:8px 16px}
   section{padding:64px 0}
 }
