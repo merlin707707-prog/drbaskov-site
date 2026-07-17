@@ -222,7 +222,7 @@ import Base from '../layouts/Base.astro';
 
   <script is:inline>
   (function(){
-    var KEY = 'W3F_KEY_HERE'; // ключ Web3Forms
+    var ENDPOINT = 'https://formsubmit.co/ajax/merlin707@mail.ru';
     var f = document.getElementById('bookform');
     var st = document.getElementById('bform-status');
     f.addEventListener('submit', function(e){
@@ -231,18 +231,18 @@ import Base from '../layouts/Base.astro';
       if(!document.getElementById('bform-agree').checked){ st.textContent = 'Нужно согласие на обработку данных.'; return; }
       if(f.botcheck.checked) return;
       st.textContent = 'Отправляю…';
-      fetch('https://api.web3forms.com/submit', {
+      fetch(ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({
-          access_key: KEY,
-          subject: 'Заявка с drbaskov.ru: ' + (f.topic.value || 'консультация'),
-          from_name: 'Сайт drbaskov.ru',
+          _subject: 'Заявка с drbaskov.ru: ' + (f.topic.value || 'консультация'),
+          _template: 'table',
+          _captcha: 'false',
           'Имя': f.name.value, 'Телефон': f.phone.value, 'Почта': f.email.value,
           'Тема': f.topic.value, 'Дополнительно': f.message.value
         })
       }).then(function(r){ return r.json(); }).then(function(d){
-        if(d.success){ f.reset(); st.textContent = 'Спасибо! Заявка отправлена — я свяжусь с вами в течение дня.'; }
+        if(d.success === 'true' || d.success === true){ f.reset(); st.textContent = 'Спасибо! Заявка отправлена — я свяжусь с вами в течение дня.'; }
         else { st.textContent = 'Не получилось отправить. Напишите, пожалуйста, в WhatsApp или Telegram.'; }
       }).catch(function(){ st.textContent = 'Не получилось отправить. Напишите, пожалуйста, в WhatsApp или Telegram.'; });
     });
