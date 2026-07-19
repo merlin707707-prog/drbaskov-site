@@ -114,6 +114,12 @@ h2.title{font-size:clamp(30px,3.8vw,42px);max-width:640px}
 .t-opt b{display:block;font-size:19px;color:var(--ink);margin-bottom:6px;font-weight:500}
 .t-opt span{font-size:10.5px;line-height:1.25;display:block}
 .t-opt:hover,.t-opt.selected{border-color:var(--gold);background:rgba(201,162,107,.1)}
+.t-opts-v{display:grid;gap:10px}
+.t-opt-v{display:flex;align-items:center;gap:14px;text-align:left;background:var(--bg);border:1px solid rgba(255,255,255,.1);color:var(--ink-dim);padding:14px 16px;cursor:pointer;transition:.2s;font-family:var(--sans)}
+.t-opt-v b{flex:0 0 26px;height:26px;display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--ink);border:1px solid rgba(255,255,255,.2);border-radius:50%;font-weight:500}
+.t-opt-v span{font-size:14.5px;line-height:1.4}
+.t-opt-v:hover,.t-opt-v.selected{border-color:var(--gold);background:rgba(201,162,107,.1)}
+.t-opt-v.selected b{border-color:var(--gold);color:var(--gold)}
 .t-nav{display:flex;justify-content:space-between;margin-top:26px}
 .t-history{margin-top:28px;border-top:1px solid rgba(255,255,255,.08);padding-top:18px}
 .t-history h3{font-size:17px;margin-bottom:10px}

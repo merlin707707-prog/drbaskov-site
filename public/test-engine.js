@@ -74,17 +74,23 @@
       '<div class="t-progress"><div class="t-progress-bar" style="width:' + pct + '%"></div></div>' +
       '<div class="t-count">' + (idx + 1) + ' / ' + T.items.length + '</div>' +
       '<p class="t-question">' + esc(item.text) + '</p>' +
-      '<div class="t-scale">' + T.scaleLabels.map(function (lab, i) {
-        const v = VS + i;
-        const sel = answers[idx] === v ? ' selected' : '';
-        return '<button class="t-opt' + sel + '" data-v="' + v + '"><b>' + v + '</b><span>' + lab + '</span></button>';
-      }).join('') + '</div>' +
+      (item.opts
+        ? '<div class="t-opts-v">' + item.opts.map(function (lab, i) {
+            const v = VS + i;
+            const sel = answers[idx] === v ? ' selected' : '';
+            return '<button class="t-opt-v' + sel + '" data-v="' + v + '"><b>' + v + '</b><span>' + esc(lab) + '</span></button>';
+          }).join('') + '</div>'
+        : '<div class="t-scale">' + T.scaleLabels.map(function (lab, i) {
+            const v = VS + i;
+            const sel = answers[idx] === v ? ' selected' : '';
+            return '<button class="t-opt' + sel + '" data-v="' + v + '"><b>' + v + '</b><span>' + lab + '</span></button>';
+          }).join('') + '</div>') +
       '<div class="t-nav">' +
       (idx > 0 ? '<button class="t-btn small" id="t-back">← Назад</button>' : '<span></span>') +
       '<button class="t-btn small" id="t-exit">Сохранить и выйти</button>' +
       '</div></div>'
     ));
-    root.querySelectorAll('.t-opt').forEach(function (b) {
+    root.querySelectorAll('.t-opt, .t-opt-v').forEach(function (b) {
       b.onclick = function () {
         answers[idx] = +b.dataset.v; idx++;
         saveProgress(); question();
