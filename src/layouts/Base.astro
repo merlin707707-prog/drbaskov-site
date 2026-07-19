@@ -5,14 +5,14 @@ interface Props {
   title: string;
   description?: string;
 }
-const { title, description = 'Владислав Басков — врач-психотерапевт. Схематерапия, юнгианский анализ, гипнотерапия. Приём в Москве и онлайн.' } = Astro.props;
+const { title, description = 'Владислав Басков — врач-психотерапевт. КПТ и схематерапия, юнгианский анализ, гипнотерапия. Приём в Москве и онлайн.' } = Astro.props;
 
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'Physician',
   name: 'Владислав Басков',
   medicalSpecialty: 'Psychiatric',
-  description: 'Врач-психотерапевт: схематерапия, юнгианский анализ, гипнотерапия, интегративный подход',
+  description: 'Врач-психотерапевт: КПТ, схематерапия, юнгианский анализ, гипнотерапия, интегративный подход',
   address: { '@type': 'PostalAddress', streetAddress: 'ул. Маросейка, 9/2', addressLocality: 'Москва', addressCountry: 'RU' },
   telephone: '+79772514879',
   priceRange: '4000–7000 RUB',
