@@ -28,7 +28,7 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:6
 .logo{font-family:var(--serif);font-size:21px;color:var(--ink);text-decoration:none;letter-spacing:.02em}
 .logo span{color:var(--gold)}
 nav ul{display:flex;gap:32px;list-style:none}
-nav ul a{color:var(--ink-dim);text-decoration:none;font-size:13px;letter-spacing:.06em;transition:.25s}
+nav ul a{color:var(--ink);text-decoration:none;font-size:15px;font-weight:500;letter-spacing:.04em;transition:.25s}
 nav ul a:hover{color:var(--gold)}
 .nav-cta{font-size:12px;padding:10px 22px}
 
@@ -211,7 +211,7 @@ footer a{color:var(--ink-dim)}
   .about-grid{grid-template-columns:1fr;gap:36px}
   nav .wrap{flex-wrap:wrap;height:auto;padding-top:10px;padding-bottom:8px;row-gap:4px}
   nav ul{display:flex;flex-wrap:wrap;order:3;width:100%;justify-content:center;gap:4px 16px;padding:4px 0 2px}
-  nav ul a{font-size:12.5px}
+  nav ul a{font-size:14px}
   .nav-cta{font-size:11px;padding:8px 16px}
   section{padding:64px 0}
 }
