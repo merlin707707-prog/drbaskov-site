@@ -137,7 +137,7 @@ h2.title{font-size:clamp(30px,3.8vw,42px);max-width:640px}
 @media(max-width:860px){.t-scale{grid-template-columns:repeat(3,1fr)}.tests-cards{grid-template-columns:1fr}.t-card{padding:24px}}
 
 /* PRICING */
-.p-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px}
+.p-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:48px;max-width:860px;margin-left:auto;margin-right:auto}
 .p-card{background:var(--bg);border:1px solid rgba(255,255,255,.06);padding:40px 32px;text-align:center}
 .p-card.featured{border-color:var(--gold)}
 .p-card .kind{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
