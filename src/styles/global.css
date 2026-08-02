@@ -25,17 +25,30 @@ section{padding:96px 0}
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(16,18,24,.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.05)}
 nav .wrap{display:flex;align-items:center;gap:28px;height:68px;max-width:1240px}
-.logo{font-family:var(--serif);font-size:21px;color:var(--ink);text-decoration:none;letter-spacing:.02em;flex:0 0 auto;margin-right:8px}
-.logo span{color:var(--gold)}
+.logo{display:inline-flex;align-items:center;gap:10px;font-family:var(--serif);font-size:21px;color:var(--ink);text-decoration:none;letter-spacing:.02em;flex:0 0 auto;margin-right:8px}
+.logo-mark{color:var(--gold);flex:0 0 auto;transition:transform .5s cubic-bezier(.2,.7,.2,1),opacity .3s ease;opacity:.9}
+.logo:hover .logo-mark{transform:rotate(45deg);opacity:1}
+.logo-text span{color:var(--gold)}
+@media(max-width:520px){ .logo-mark{width:20px;height:20px} .logo{gap:8px;font-size:19px} }
 nav ul{display:flex;gap:26px;list-style:none;flex:1 1 auto;justify-content:center}
 nav ul a{color:var(--ink);text-decoration:none;font-size:14.5px;font-weight:500;letter-spacing:.03em;transition:.25s;white-space:nowrap}
 nav ul a:hover{color:var(--gold)}
-.nav-right{display:flex;align-items:center;gap:14px;flex:0 0 auto}
+.nav-right{display:flex;align-items:center;gap:12px;flex:0 0 auto}
+.nav-phone{color:var(--ink);text-decoration:none;font-size:14px;font-weight:500;letter-spacing:.02em;white-space:nowrap;transition:color .25s}
+.nav-phone:hover{color:var(--gold)}
+.nav-msg{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;
+  color:var(--gold);border:1px solid var(--line);transition:.25s;flex:0 0 auto}
+.nav-msg:hover{background:var(--gold);color:#14161d;border-color:var(--gold);transform:translateY(-1px)}
 .nav-cta{font-size:12px;padding:10px 22px;white-space:nowrap}
-@media(max-width:1180px){
+@media(max-width:1380px){
   nav ul{gap:18px}
   nav ul a{font-size:13.5px}
   .theme-toggle{display:none}
+}
+@media(max-width:1150px){ .nav-phone{display:none} }
+@media(max-width:860px){
+  .nav-right{gap:8px}
+  .nav-msg{width:30px;height:30px}
 }
 
 /* HERO */
@@ -43,7 +56,22 @@ nav ul a:hover{color:var(--gold)}
 .hero-bg{position:absolute;inset:0;background:
   radial-gradient(ellipse 60% 50% at 75% 40%, rgba(201,162,107,.08), transparent 60%),
   radial-gradient(ellipse 50% 60% at 20% 80%, rgba(70,80,140,.10), transparent 60%)}
-.mandala{position:absolute;right:-160px;top:50%;transform:translateY(-50%);opacity:.5;pointer-events:none}
+/* ── МАНДАЛА-ФОН: медленно дрейфует по всей странице ── */
+.mandala-field{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.mandala{position:absolute;left:50%;top:50%;width:900px;height:900px;margin:-450px 0 0 -450px;
+  opacity:.42;pointer-events:none;animation:mandala-drift 150s ease-in-out infinite;will-change:transform}
+@keyframes mandala-drift{
+  0%   { transform:translate(26vw,-14vh) scale(1) }
+  20%  { transform:translate(30vw,16vh)  scale(1.06) }
+  40%  { transform:translate(2vw,24vh)   scale(.98) }
+  60%  { transform:translate(-28vw,8vh)  scale(1.08) }
+  80%  { transform:translate(-18vw,-20vh) scale(1) }
+  100% { transform:translate(26vw,-14vh) scale(1) }
+}
+/* содержимое поверх фона */
+nav,header.hero,section,article,footer,.page-head,.wrap{position:relative;z-index:1}
+/* полупрозрачные полосы, чтобы мандала просвечивала */
+@media(max-width:900px){ .mandala{width:620px;height:620px;margin:-310px 0 0 -310px;opacity:.3} }
 .hero .wrap{position:relative;display:grid;grid-template-columns:1.25fr .75fr;gap:60px;align-items:center}
 .hero h1{font-size:clamp(38px,5.4vw,64px);margin-bottom:26px}
 .hero h1 em{font-style:italic;color:var(--gold)}
@@ -60,7 +88,7 @@ nav ul a:hover{color:var(--gold)}
 .portrait .ph b{display:block;font-family:var(--serif);font-size:64px;color:var(--gold);font-weight:400;margin-bottom:10px}
 
 /* SECTIONS */
-.alt{background:var(--bg-2)}
+.alt{background:rgba(255,255,255,.022)}
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px}
 .card{background:var(--bg);border:1px solid rgba(255,255,255,.05);padding:32px 28px;transition:.3s}
 .card:hover{border-color:var(--line);transform:translateY(-3px)}
@@ -283,7 +311,7 @@ html[data-theme="light"] .hero-bg{background:
   radial-gradient(ellipse 50% 60% at 20% 80%, rgba(70,80,140,.07), transparent 60%)}
 html[data-theme="light"] .mandala{opacity:.28}
 html[data-theme="light"] .docs-grid img{filter:none}
-html[data-theme="light"] section.alt{background:var(--bg-2)}
+html[data-theme="light"] section.alt{background:rgba(255,255,255,.022)}
 
 /* переключатель темы */
 .theme-toggle{background:transparent;border:1px solid var(--line);color:var(--gold);cursor:pointer;font-family:var(--sans);font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:8px 14px;transition:.25s;line-height:1;white-space:nowrap}
@@ -293,3 +321,161 @@ html[data-theme="light"] .theme-toggle::before{content:'Тёмная тема'}
 @media(max-width:860px){
   .theme-toggle{font-size:10px;padding:7px 10px}
 }
+
+/* ── ДЫШАЩАЯ МАНДАЛА ─────────────────────────────────────
+   Вдох 4 с — выдох 6 с. Ритм, к которому непроизвольно
+   подстраивается дыхание смотрящего. */
+@keyframes mandala-breath{
+  0%   { transform:scale(1);     opacity:.85 }
+  40%  { transform:scale(1.045); opacity:1 }   /* вдох — 4 с */
+  100% { transform:scale(1);     opacity:.85 } /* выдох — 6 с */
+}
+@keyframes mandala-spin{
+  from { transform:rotate(0deg) }
+  to   { transform:rotate(360deg) }
+}
+@keyframes mandala-core{
+  0%,100% { r:6;   fill-opacity:.35 }
+  40%     { r:8.5; fill-opacity:.6 }
+}
+.mandala-breath{transform-origin:310px 310px;animation:mandala-breath 10s ease-in-out infinite;will-change:transform}
+.mandala-spin{transform-origin:310px 310px;animation:mandala-spin 240s linear infinite}
+.mandala-core{animation:mandala-core 10s ease-in-out infinite}
+
+/* ── УРОБОРОС ────────────────────────────────────────────
+   Золотое кольцо проявляется по часовой стрелке по мере
+   прокрутки; голова, кусающая хвост, появляется последней. */
+.ouro{position:fixed;left:22px;bottom:22px;--p:0;
+  transform:scale(.92);z-index:40;pointer-events:none;
+  opacity:0;transition:opacity .7s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+.ouro.visible{opacity:1;transform:scale(1)}
+.ouro-img{display:block;width:64px;height:64px;
+  filter:drop-shadow(0 0 6px rgba(201,162,107,.3)) saturate(.92) brightness(.98);
+  -webkit-mask-image:conic-gradient(from 42deg,
+      #000 0 calc(var(--p) * 360deg),
+      rgba(0,0,0,.35) calc(var(--p) * 360deg) calc(var(--p) * 360deg + 7deg),
+      transparent calc(var(--p) * 360deg + 7deg) 360deg);
+          mask-image:conic-gradient(from 42deg,
+      #000 0 calc(var(--p) * 360deg),
+      rgba(0,0,0,.35) calc(var(--p) * 360deg) calc(var(--p) * 360deg + 7deg),
+      transparent calc(var(--p) * 360deg + 7deg) 360deg);
+  transition:filter .6s ease}
+
+/* замкнулся: змей укусил хвост */
+@keyframes ouro-close{
+  0%   { transform:scale(1) }
+  35%  { transform:scale(1.12) }
+  100% { transform:scale(1) }
+}
+.ouro.closed{animation:ouro-close 1.2s ease-in-out}
+.ouro.closed .ouro-img{filter:drop-shadow(0 0 12px rgba(201,162,107,.6)) saturate(1.05) brightness(1.06)}
+@media(max-width:900px){ .ouro{display:none} }
+
+html[data-theme="light"] .ouro-img{filter:drop-shadow(0 0 6px rgba(150,113,47,.32)) saturate(.95) brightness(.9)}
+
+/* уважение к системной настройке «меньше движения» */
+@media (prefers-reduced-motion: reduce){
+  .mandala-breath,.mandala-spin,.mandala-core{animation:none}
+  .ouro{display:none}
+}
+
+/* мандала: дополнительные слои */
+@keyframes mandala-spin-rev{ from{transform:rotate(0deg)} to{transform:rotate(-360deg)} }
+@keyframes mandala-halo{
+  0%,100% { r:18; stroke-opacity:.30 }
+  40%     { r:26; stroke-opacity:.14 }
+}
+.mandala-petals{transform-origin:310px 310px;animation:mandala-spin-rev 360s linear infinite}
+.mandala-spiral{transform-origin:310px 310px;animation:mandala-spin 600s linear infinite;stroke-linecap:round}
+.mandala-halo{animation:mandala-halo 10s ease-in-out infinite}
+@media (prefers-reduced-motion: reduce){
+  .mandala-petals,.mandala-spiral,.mandala-halo{animation:none}
+}
+
+/* ── СБОРКА МАНДАЛЫ ИЗ ФРАГМЕНТОВ ────────────────────────
+   При загрузке страницы части сходятся в целое: круг,
+   квадратура, лепестки, четверица, центр. ~3 секунды. */
+@keyframes m-in-scale{
+  from { opacity:0; transform:scale(1.35) }
+  to   { opacity:1; transform:scale(1) }
+}
+@keyframes m-in-square{
+  from { opacity:0; transform:scale(.55) rotate(-28deg) }
+  to   { opacity:1; transform:scale(1) rotate(0deg) }
+}
+@keyframes m-in-diamond{
+  from { opacity:0; transform:scale(.55) rotate(32deg) }
+  to   { opacity:1; transform:scale(1) rotate(0deg) }
+}
+@keyframes m-in-petal{
+  from { opacity:0; transform:scale(.2) }
+  to   { opacity:1; transform:scale(1) }
+}
+@keyframes m-in-dot{
+  from { opacity:0; transform:scale(0) }
+  60%  { opacity:1; transform:scale(1.6) }
+  to   { opacity:1; transform:scale(1) }
+}
+@keyframes m-in-core{
+  from { opacity:0; transform:scale(0) }
+  to   { opacity:1; transform:scale(1) }
+}
+@keyframes m-draw{
+  from { stroke-dasharray:1; stroke-dashoffset:1 }
+  to   { stroke-dasharray:1; stroke-dashoffset:0 }
+}
+
+.mandala [class*="m-a"],
+.m-petal,
+.m-dots circle,
+.mandala-spiral{transform-origin:310px 310px;transform-box:view-box}
+
+.m-a1{animation:m-in-scale 1.4s cubic-bezier(.2,.7,.2,1) .1s both}
+.m-a2{animation:m-in-square 1.4s cubic-bezier(.2,.7,.2,1) .45s both}
+.m-a3{animation:m-in-diamond 1.4s cubic-bezier(.2,.7,.2,1) .65s both}
+.m-a4{animation:m-in-scale 1.2s cubic-bezier(.2,.7,.2,1) .9s both}
+.m-a5{animation:m-in-scale 1.2s cubic-bezier(.2,.7,.2,1) 1.9s both}
+.m-a6{animation:m-in-core .9s cubic-bezier(.2,.7,.2,1) 2.6s both}
+.m-petal{animation:m-in-petal 1s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(1.15s + var(--i) * .09s)}
+.m-dots circle{animation:m-in-dot .7s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(2.1s + var(--i) * .07s)}
+.mandala-spiral{animation:m-draw 3.4s ease-in-out .6s both, mandala-spin 600s linear 4s infinite}
+
+/* дыхание и вращение стартуют после сборки */
+.mandala-breath{animation-delay:3.2s}
+.mandala-spin{animation-delay:3.2s}
+.mandala-core{animation-delay:3.4s}
+.mandala-halo{animation-delay:3.4s}
+.mandala-petals{animation-delay:3.2s}
+
+@media (prefers-reduced-motion: reduce){
+  .m-a1,.m-a2,.m-a3,.m-a4,.m-a5,.m-a6,.m-petal,.m-dots circle,.mandala-spiral{animation:none;opacity:1;transform:none}
+}
+
+/* ── ЗНАК ПО КЛИКУ ───────────────────────────────────────
+   В точке нажатия вычерчивается четверица: круг, лучи, центр. */
+.sigil{position:fixed;left:0;top:0;width:0;height:0;pointer-events:none;z-index:60}
+.sigil svg{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-90deg);overflow:visible;
+  animation:sg-out 1.9s ease-in forwards}
+.sigil circle,.sigil path{fill:none;stroke:var(--gold);stroke-linecap:round}
+
+.sg-ring{stroke-width:1.6;stroke-opacity:.85;stroke-dasharray:1;stroke-dashoffset:1;
+  animation:sg-draw .62s cubic-bezier(.3,.7,.3,1) forwards}
+.sg-ray{stroke-width:1.3;stroke-opacity:.6;stroke-dasharray:1;stroke-dashoffset:1;
+  animation:sg-draw .34s ease-out forwards}
+.sg-ray.r1{animation-delay:.34s}
+.sg-ray.r2{animation-delay:.42s}
+.sg-ray.r3{animation-delay:.5s}
+.sg-ray.r4{animation-delay:.58s}
+.sg-core{fill:var(--gold);stroke:none;transform-origin:50px 50px;transform:scale(0);
+  animation:sg-pop .5s cubic-bezier(.2,1.5,.4,1) .68s forwards}
+.sg-wave{stroke-width:1;stroke-opacity:0;transform-origin:50px 50px;transform:scale(.25);
+  animation:sg-wave 1.5s cubic-bezier(.15,.6,.25,1) .1s forwards}
+
+@keyframes sg-draw{ to { stroke-dashoffset:0 } }
+@keyframes sg-pop{ 0%{transform:scale(0);opacity:0} 100%{transform:scale(1);opacity:.95} }
+@keyframes sg-wave{ 0%{stroke-opacity:.5;transform:scale(.25)} 100%{stroke-opacity:0;transform:scale(1.9)} }
+@keyframes sg-out{
+  0%,55% { opacity:1; transform:translate(-50%,-50%) rotate(-90deg) scale(1) }
+  100%   { opacity:0; transform:translate(-50%,-50%) rotate(-90deg) scale(1.14) }
+}
+@media (prefers-reduced-motion: reduce){ .sigil{display:none} }

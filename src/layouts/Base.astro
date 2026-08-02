@@ -49,7 +49,14 @@ const schema = {
 <body>
   <nav>
     <div class="wrap">
-      <a class="logo" href="/">Dr.<span>Басков</span></a>
+      <a class="logo" href="/">
+        <svg class="logo-mark" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <circle cx="12" cy="12" r="10.4" fill="none" stroke="currentColor" stroke-opacity=".6" stroke-width="1.5"/>
+          <path d="M12 3.4v5.2M12 15.4v5.2M3.4 12h5.2M15.4 12h5.2" stroke="currentColor" stroke-opacity=".42" stroke-width="1.2" stroke-linecap="round"/>
+          <circle cx="12" cy="12" r="2.2" fill="currentColor"/>
+        </svg>
+        <span class="logo-text">Dr.<span>Басков</span></span>
+      </a>
       <ul>
         <li><a href="/#methods">Методы</a></li>
         <li><a href="/#process">Как проходит</a></li>
@@ -60,11 +67,93 @@ const schema = {
         <li><a href="/psihologam/">Психологам</a></li>
       </ul>
       <div class="nav-right">
-        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Переключить тему"></button>
         <a class="btn nav-cta" href="/#contact">Записаться</a>
+        <a class="nav-phone" href="tel:+79772514879">+7 977 251-48-79</a>
+        <a class="nav-msg wa" href="https://wa.me/79772514879" target="_blank" rel="noopener" aria-label="Написать в WhatsApp" title="WhatsApp">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true">
+            <path d="M12.04 2A9.9 9.9 0 0 0 2.1 11.9c0 1.75.46 3.46 1.34 4.97L2 22l5.28-1.38a9.9 9.9 0 0 0 4.76 1.21h.01a9.9 9.9 0 0 0 9.93-9.9A9.9 9.9 0 0 0 12.04 2Zm0 18.14h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.13.82.84-3.05-.2-.31a8.2 8.2 0 0 1-1.26-4.37 8.24 8.24 0 1 1 8.25 8.24Zm4.52-6.16c-.25-.13-1.47-.72-1.69-.8-.23-.09-.39-.13-.56.12-.16.25-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.48-.4-.42-.56-.43h-.47c-.16 0-.43.06-.65.31-.22.25-.85.83-.85 2.03s.87 2.35.99 2.51c.12.17 1.71 2.61 4.14 3.66.58.25 1.03.4 1.38.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.11-.22-.17-.47-.29Z"/>
+          </svg>
+        </a>
+        <a class="nav-msg tg" href="https://t.me/kvazarlin" target="_blank" rel="noopener" aria-label="Написать в Telegram" title="Telegram">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true">
+            <path d="M21.7 3.5 2.9 10.8c-1.05.42-1.04 1.01-.19 1.27l4.7 1.47 1.82 5.57c.22.61.11.85.75.85.49 0 .71-.23.98-.5l2.34-2.28 4.87 3.6c.9.5 1.54.24 1.76-.83l3.19-15.04c.33-1.31-.5-1.9-1.42-1.41ZM7.9 13.2l10.5-6.62c.52-.32 1-.15.6.2l-8.98 8.1-.35 3.73-1.77-5.41Z"/>
+          </svg>
+        </a>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Переключить тему"></button>
       </div>
     </div>
   </nav>
+
+  <div class="ouro" id="ouro" aria-hidden="true">
+    <img class="ouro-img" id="ouro-img" src="/ouroboros.png" alt="" width="128" height="128" loading="lazy" />
+  </div>
+
+
+
+  <div class="mandala-field" aria-hidden="true">
+  <svg class="mandala" width="620" height="620" viewBox="0 0 620 620" fill="none" aria-hidden="true">
+      <defs>
+        <g id="petal">
+          <path d="M310 252 C 254 218 254 168 310 128 C 366 168 366 218 310 252 Z"/>
+        </g>
+      </defs>
+      <g class="mandala-breath">
+  
+        <!-- внешний круг -->
+        <g class="mandala-spin">
+          <g class="m-ring m-a1" stroke="#c9a26b" stroke-opacity=".14">
+            <circle cx="310" cy="310" r="300"/>
+            <circle cx="310" cy="310" r="288"/>
+          </g>
+          <!-- квадратура круга -->
+          <g class="m-square m-a2" stroke="#c9a26b" stroke-opacity=".14">
+            <rect x="140.3" y="140.3" width="339.4" height="339.4"/>
+          </g>
+          <g class="m-diamond m-a3" stroke="#c9a26b" stroke-opacity=".14">
+            <path d="M310 70L550 310L310 550L70 310Z"/>
+          </g>
+          <g class="m-ring m-a4" stroke="#c9a26b" stroke-opacity=".14">
+            <circle cx="310" cy="310" r="240"/>
+          </g>
+        </g>
+  
+        <!-- спираль индивидуации: прочерчивается -->
+        <path class="mandala-spiral" pathLength="1" d="M310.0,300.0 L310.8,299.0 L311.7,298.0 L312.8,297.2 L314.1,296.4 L315.4,295.8 L316.9,295.2 L318.4,294.9 L320.1,294.6 L321.8,294.6 L323.6,294.7 L325.4,295.0 L327.2,295.5 L329.1,296.1 L330.9,297.0 L332.7,298.1 L334.5,299.3 L336.2,300.8 L337.8,302.4 L339.3,304.3 L340.7,306.3 L341.9,308.5 L343.0,310.8 L343.9,313.3 L344.6,315.9 L345.1,318.7 L345.4,321.5 L345.4,324.4 L345.2,327.4 L344.8,330.4 L344.1,333.5 L343.1,336.6 L341.8,339.6 L340.3,342.6 L338.5,345.5 L336.5,348.4 L334.2,351.1 L331.6,353.7 L328.8,356.1 L325.7,358.3 L322.4,360.3 L318.9,362.1 L315.2,363.7 L311.3,365.0 L307.3,366.0 L303.1,366.7 L298.8,367.0 L294.5,367.1 L290.0,366.8 L285.5,366.2 L281.0,365.2 L276.6,363.8 L272.1,362.1 L267.8,360.0 L263.6,357.6 L259.4,354.8 L255.5,351.6 L251.8,348.2 L248.2,344.3 L245.0,340.2 L242.0,335.8 L239.3,331.1 L236.9,326.2 L234.9,321.0 L233.2,315.6 L232.0,310.0 L231.2,304.3 L230.7,298.4 L230.8,292.5 L231.2,286.5 L232.2,280.5 L233.6,274.5 L235.4,268.5 L237.8,262.7 L240.5,256.9 L243.8,251.3 L247.5,245.9 L251.6,240.8 L256.2,235.9 L261.1,231.3 L266.5,227.0 L272.2,223.1 L278.2,219.6 L284.6,216.6 L291.2,213.9 L298.1,211.8 L305.2,210.1 L312.4,209.0 L319.9,208.4 L327.4,208.4 L334.9,208.9 L342.5,209.9 L350.1,211.6 L357.6,213.8 L364.9,216.6 L372.1,220.0 L379.2,223.9 L385.9,228.4 L392.4,233.4 L398.5,238.9 L404.3,244.9 L409.7,251.4 L414.6,258.3 L419.1,265.6 L423.0,273.3 L426.4,281.3 L429.2,289.6 L431.4,298.2 L432.9,307.0 L433.9,316.0 L434.2,325.1 L433.8,334.2 L432.7,343.4 L430.9,352.6 L428.5,361.6 L425.4,370.6 L421.6,379.3 L417.1,387.8 L412.0,396.1 L406.2,403.9 L399.9,411.5 L392.9,418.5 L385.4,425.1 L377.4,431.2 L368.9,436.7 L359.9,441.6 L350.6,445.9 L340.8,449.5 L330.8,452.4 L320.5,454.6 L310.0,456.0 L299.3,456.7 L288.6,456.5 L277.8,455.6 L267.1,453.9 L256.4,451.4 L245.8,448.1 L235.5,444.0 L225.4,439.1 L215.6,433.5 L206.2,427.1 L197.3,420.0 L188.8,412.2 L180.9,403.8 L173.5,394.8 L166.8,385.1 L160.8,375.0 L155.5,364.4 L151.0,353.3 L147.2,341.9 L144.3,330.1 L142.2,318.1 L141.0,305.9 L140.7,293.6 L141.3,281.2 L142.8,268.8 L145.3,256.5 L148.6,244.3 L152.9,232.3 L158.0,220.6 L164.0,209.2 L170.9,198.3 L178.6,187.8 L187.1,177.8 L196.3,168.4 L206.3,159.7 L216.9,151.7 L228.1,144.4 L240.0,138.0 L252.3,132.3 L265.0,127.6 L278.2,123.8 L291.7,120.9 L305.4,119.1 L319.3,118.2 L333.3,118.3 L347.3,119.5 L361.3,121.7 L375.1,124.9 L388.8,129.2 L402.2,134.4 L415.2,140.7 L427.8,147.9 L439.9,156.0 L451.4,165.1 L462.4,175.0 L472.6,185.8 L482.0,197.3 L490.6,209.6 L498.4,222.5 L505.2,236.0 L511.1,250.0 L515.9,264.5 L519.7,279.4 L522.4,294.6 L524.0,310.0 L524.5,325.6 L523.8,341.2 L522.0,356.9 L519.1,372.4 L515.0,387.7 L509.8,402.8 L503.4,417.6 L496.0,431.9 L487.5,445.6 L478.0,458.8 L467.5,471.4 L456.1,483.2 L443.8,494.1 L430.6,504.2 L416.7,513.4 L402.1,521.5 L386.9,528.6 L371.2,534.7 L354.9,539.5 L338.3,543.2 L321.4,545.7 L304.3,546.9 L287.0,547.0 L269.7,545.7 L252.5,543.2 L235.5,539.4 L218.7,534.4 L202.2,528.1 L186.1,520.6 L170.6,511.9 L155.7,502.1 L141.5,491.2 L128.0,479.2 L115.4,466.3 L103.7,452.4 L93.1,437.6 L83.5,422.0 L75.0,405.7 L67.7,388.7 L61.6,371.2 L56.8,353.2 L53.3,334.9 L51.1,316.3 L50.3,297.4 L50.8,278.5 L52.8,259.6 L56.1,240.9 L60.8,222.3 L66.8,204.1 L74.2,186.2 L82.9,168.9 L92.9,152.2 L104.1,136.2 L116.4,121.1 L129.9,106.8 L144.5,93.4 L160.0,81.1 L176.5,69.9 L193.8,60.0 L211.9,51.2 L230.6,43.8 L249.8,37.7 L269.6,33.0 L289.6,29.8 L310.0,28.0" stroke="#c9a26b" stroke-opacity=".10" stroke-width="1"/>
+  
+        <!-- восемь лепестков -->
+        <g class="mandala-petals" stroke="#c9a26b" stroke-opacity=".2">
+          <g class="m-petal" style="--i:0"><use href="#petal" transform="rotate(0 310 310)"/></g>
+          <g class="m-petal" style="--i:1"><use href="#petal" transform="rotate(45 310 310)"/></g>
+          <g class="m-petal" style="--i:2"><use href="#petal" transform="rotate(90 310 310)"/></g>
+          <g class="m-petal" style="--i:3"><use href="#petal" transform="rotate(135 310 310)"/></g>
+          <g class="m-petal" style="--i:4"><use href="#petal" transform="rotate(180 310 310)"/></g>
+          <g class="m-petal" style="--i:5"><use href="#petal" transform="rotate(225 310 310)"/></g>
+          <g class="m-petal" style="--i:6"><use href="#petal" transform="rotate(270 310 310)"/></g>
+          <g class="m-petal" style="--i:7"><use href="#petal" transform="rotate(315 310 310)"/></g>
+        </g>
+  
+        <!-- четверица -->
+        <g class="m-dots" fill="#c9a26b" fill-opacity=".38">
+          <circle style="--i:0" cx="310" cy="70" r="4"/><circle style="--i:1" cx="550" cy="310" r="4"/>
+          <circle style="--i:2" cx="310" cy="550" r="4"/><circle style="--i:3" cx="70" cy="310" r="4"/>
+        </g>
+        <g class="m-dots" fill="#c9a26b" fill-opacity=".2">
+          <circle style="--i:4" cx="480" cy="140" r="2.5"/><circle style="--i:5" cx="480" cy="480" r="2.5"/>
+          <circle style="--i:6" cx="140" cy="480" r="2.5"/><circle style="--i:7" cx="140" cy="140" r="2.5"/>
+        </g>
+  
+        <!-- внутренние круги -->
+        <g class="m-ring m-a5" stroke="#c9a26b" stroke-opacity=".16">
+          <circle cx="310" cy="310" r="120"/>
+          <circle cx="310" cy="310" r="60"/>
+        </g>
+  
+        <!-- центр: Самость -->
+        <circle class="mandala-core m-a6" cx="310" cy="310" r="6" fill="#c9a26b" fill-opacity=".5"/>
+        <circle class="mandala-halo m-a6" cx="310" cy="310" r="18" stroke="#c9a26b" stroke-opacity=".3"/>
+      </g>
+    </svg>
+  </div>
 
   <slot />
 
@@ -87,6 +176,70 @@ const schema = {
         else { root.setAttribute('data-theme','light'); }
         try { localStorage.setItem('theme', light ? 'dark' : 'light'); } catch(e){}
       });
+    })();
+  </script>
+
+  <script is:inline>
+    /* Уроборос: кольцо проявляется по мере прокрутки и смыкается в конце */
+    (function(){
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var wrap = document.getElementById('ouro');
+      if (!wrap) return;
+
+      var ticking = false;
+      function update(){
+        ticking = false;
+        var docH = document.documentElement.scrollHeight - window.innerHeight;
+        if (docH <= 200) { wrap.classList.remove('visible'); return; }
+        var p = Math.min(1, Math.max(0, window.scrollY / docH));
+        wrap.classList.toggle('visible', window.scrollY > 140);
+        wrap.style.setProperty('--p', p.toFixed(4));
+        wrap.classList.toggle('closed', p > 0.985);
+      }
+
+      function onScroll(){
+        if (!ticking) { ticking = true; requestAnimationFrame(update); }
+      }
+
+      update();
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', update, { passive: true });
+      window.addEventListener('load', update);
+    })();
+  </script>
+
+
+
+  <script is:inline>
+    /* По клику в точке касания вычерчивается знак-четверица */
+    (function(){
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var NS = 'http://www.w3.org/2000/svg';
+      var last = 0;
+
+      document.addEventListener('pointerdown', function(e){
+        if (e.button !== undefined && e.button !== 0) return;
+        var now = Date.now();
+        if (now - last < 260) return;
+        last = now;
+
+        var box = document.createElement('span');
+        box.className = 'sigil';
+        box.style.left = e.clientX + 'px';
+        box.style.top = e.clientY + 'px';
+        box.innerHTML =
+          '<svg viewBox="0 0 100 100" width="44" height="44">' +
+            '<circle class="sg-wave" cx="50" cy="50" r="46" pathLength="1"/>' +
+            '<circle class="sg-ring" cx="50" cy="50" r="30" pathLength="1"/>' +
+            '<path class="sg-ray r1" d="M50 12v13" pathLength="1"/>' +
+            '<path class="sg-ray r2" d="M50 75v13" pathLength="1"/>' +
+            '<path class="sg-ray r3" d="M12 50h13" pathLength="1"/>' +
+            '<path class="sg-ray r4" d="M75 50h13" pathLength="1"/>' +
+            '<circle class="sg-core" cx="50" cy="50" r="5"/>' +
+          '</svg>';
+        document.body.appendChild(box);
+        setTimeout(function(){ box.remove(); }, 2000);
+      }, { passive: true });
     })();
   </script>
 
