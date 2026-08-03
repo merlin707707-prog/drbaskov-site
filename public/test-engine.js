@@ -3,7 +3,12 @@
   const T = window.TEST_CONFIG;
   if (!T) return;
   const VS = T.valueStart == null ? 1 : T.valueStart;           // первое значение шкалы
-  const VMAX = VS + T.scaleLabels.length - 1;                   // последнее значение шкалы
+  /* число градаций: из общей шкалы или из вариантов ответа у пунктов */
+  const STEPS = (T.scaleLabels && T.scaleLabels.length) ||
+    (T.items || []).reduce(function (m, it) {
+      return it && it.opts ? Math.max(m, it.opts.length) : m;
+    }, 0) || 5;
+  const VMAX = VS + STEPS - 1;                                   // последнее значение шкалы
   const SUM = T.scoring === 'sum';                              // подсчёт суммой (PHQ-9) или средним
   const root = document.getElementById('test-root');
   const LS_PROG = 'test_' + T.id + '_progress';
@@ -80,7 +85,7 @@
             const sel = answers[idx] === v ? ' selected' : '';
             return '<button class="t-opt-v' + sel + '" data-v="' + v + '"><b>' + v + '</b><span>' + esc(lab) + '</span></button>';
           }).join('') + '</div>'
-        : '<div class="t-scale">' + T.scaleLabels.map(function (lab, i) {
+        : '<div class="t-scale">' + (T.scaleLabels || []).map(function (lab, i) {
             const v = VS + i;
             const sel = answers[idx] === v ? ' selected' : '';
             return '<button class="t-opt' + sel + '" data-v="' + v + '"><b>' + v + '</b><span>' + lab + '</span></button>';
