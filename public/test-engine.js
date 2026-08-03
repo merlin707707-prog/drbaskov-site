@@ -141,8 +141,20 @@
     results(rec, false);
   }
 
-  function band(mean, positive, custom) {
-    const bands = custom || T.bands;
+  /* Диапазоны по умолчанию — для тестов, где bands не заданы:
+     шкала делится на три части от минимума до максимума. */
+  function autoBands(min, max) {
+    const a = min + (max - min) / 3, b = min + (max - min) * 2 / 3;
+    return [
+      { max: a, label: 'низкий уровень',   color: '#7fb069', pos: { label: 'низкий уровень',   color: '#d98e4a' } },
+      { max: b, label: 'средний уровень',  color: '#c9a26b', pos: { label: 'средний уровень',  color: '#c9a26b' } },
+      { max: Infinity, label: 'высокий уровень', color: '#d98e4a', pos: { label: 'высокий уровень', color: '#7fb069' } }
+    ];
+  }
+
+  function band(mean, positive, custom, min, max) {
+    const bands = custom || T.bands ||
+      autoBands(min == null ? (SUM ? 0 : VS) : min, max == null ? VMAX : max);
     for (const b of bands) { if (mean < b.max) return positive ? (b.pos || b) : b; }
     const last = bands[bands.length - 1];
     return positive ? (last.pos || last) : last;
@@ -156,7 +168,7 @@
       if (g) html += '<h3 class="t-group">' + g + '</h3>';
       groups[g].sort(function (a, b) { return b.mean - a.mean; });
       groups[g].forEach(function (s) {
-        const bd = band(s.mean, s.positive, s.bands);
+        const bd = band(s.mean, s.positive, s.bands, s.min, s.max);
         const w = Math.round((s.mean - s.min) / (s.max - s.min) * 100);
         const valTxt = SUM ? (s.mean + ' из ' + s.max) : s.mean.toFixed(2);
         html += '<div class="t-res-row"><div class="t-res-head"><span>' + s.name + '</span>' +
@@ -179,7 +191,7 @@
       let txt = T.title + '\r\nДата: ' + rec.date + '\r\nСайт: https://drbaskov.ru\r\n\r\n';
       rec.scales.forEach(function (s) {
         const v = SUM ? (s.mean + ' из ' + s.max) : s.mean.toFixed(2);
-        txt += (s.group ? '[' + s.group + '] ' : '') + s.name + ': ' + v + ' (' + band(s.mean, s.positive, s.bands).label + ')\r\n';
+        txt += (s.group ? '[' + s.group + '] ' : '') + s.name + ': ' + v + ' (' + band(s.mean, s.positive, s.bands, s.min, s.max).label + ')\r\n';
       });
       txt += '\r\nЭто скрининговая самодиагностика, не медицинский диагноз.\r\n';
       const blob = new Blob(['﻿' + txt], { type: 'text/plain;charset=utf-8' });

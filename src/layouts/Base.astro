@@ -90,6 +90,20 @@ const schema = {
 
 
 
+  <script is:inline>
+    /* На страницах чтения мандала оживает на 5 секунд и замирает */
+    (function(){
+      var p = location.pathname;
+      var reading = /^\/(blog|tests)\/.+/.test(p) || /^\/(pomosch|vzglyad|psihologam|specialistam-ocenka-riska)\/?$/.test(p);
+      if (!reading) return;
+      document.documentElement.classList.add('reading-page');
+      document.addEventListener('DOMContentLoaded', function(){
+        document.body.classList.add('reading');
+        setTimeout(function(){ document.body.classList.add('settled'); }, 5000);
+      });
+    })();
+  </script>
+
   <div class="mandala-field" aria-hidden="true">
   <svg class="mandala" width="620" height="620" viewBox="0 0 620 620" fill="none" aria-hidden="true">
       <defs>

@@ -60,6 +60,23 @@ nav ul a:hover{color:var(--gold)}
 .mandala-field{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
 .mandala{position:absolute;left:50%;top:50%;width:900px;height:900px;margin:-450px 0 0 -450px;
   opacity:.42;pointer-events:none;animation:mandala-drift 150s ease-in-out infinite;will-change:transform}
+
+/* На страницах чтения (статьи, тесты) мандала оживает на 5 секунд,
+   а затем замирает, чтобы не отвлекать. */
+body.reading .mandala{animation:mandala-intro 5s cubic-bezier(.25,.6,.3,1) forwards}
+body.reading .mandala-breath{animation:mandala-breath 10s ease-in-out 2;animation-delay:0s}
+body.reading .mandala-spin{animation:mandala-spin 40s linear 1}
+body.reading .mandala-petals{animation:mandala-spin-rev 50s linear 1}
+body.reading .mandala-spiral{animation:m-draw 3.4s ease-in-out .4s both}
+body.reading .mandala-core,
+body.reading .mandala-halo{animation-iteration-count:2}
+body.reading .mandala-field{opacity:1;transition:opacity 1.6s ease 4.4s}
+body.reading.settled .mandala-field{opacity:.5}
+@keyframes mandala-intro{
+  0%   { transform:translate(16vw,-6vh) scale(1.04); opacity:.05 }
+  25%  { opacity:.42 }
+  100% { transform:translate(24vw,4vh) scale(1); opacity:.42 }
+}
 @keyframes mandala-drift{
   0%   { transform:translate(26vw,-14vh) scale(1) }
   20%  { transform:translate(30vw,16vh)  scale(1.06) }
