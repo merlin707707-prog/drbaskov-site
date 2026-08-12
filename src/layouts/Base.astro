@@ -271,5 +271,57 @@ const schema = {
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/110630668" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
+
+  <!-- Цели Метрики: контакты, запись, тесты -->
+  <script is:inline>
+    (function () {
+      var ID = 110630668;
+      function goal(name, params) {
+        try { if (window.ym) window.ym(ID, 'reachGoal', name, params || {}); } catch (e) {}
+      }
+      window.dbGoal = goal;
+
+      // 1. Клики по контактам и кнопкам записи
+      document.addEventListener('click', function (e) {
+        var a = e.target && e.target.closest ? e.target.closest('a') : null;
+        if (!a) return;
+        var href = a.getAttribute('href') || '';
+        var where = location.pathname;
+
+        if (href.indexOf('tel:') === 0) goal('phone', { page: where });
+        else if (href.indexOf('wa.me') > -1 || href.indexOf('whatsapp') > -1) goal('whatsapp', { page: where });
+        else if (href.indexOf('t.me') > -1) goal('telegram', { page: where });
+        else if (href.indexOf('mailto:') === 0) goal('email', { page: where });
+        else if (/#contact$/.test(href)) goal('zapis_click', { page: where });
+      }, true);
+
+      // 2. Дочитал до блока записи
+      var cta = document.getElementById('contact');
+      if (cta && 'IntersectionObserver' in window) {
+        var seen = false;
+        var io = new IntersectionObserver(function (entries) {
+          if (!seen && entries[0].isIntersecting) {
+            seen = true; goal('contact_view', { page: location.pathname }); io.disconnect();
+          }
+        }, { threshold: 0.4 });
+        io.observe(cta);
+      }
+
+      // 3. Дочитал статью до конца
+      var art = document.querySelector('article');
+      if (art && /^\/blog\//.test(location.pathname) && 'IntersectionObserver' in window) {
+        var end = document.createElement('div');
+        end.style.cssText = 'height:1px';
+        art.appendChild(end);
+        var readSeen = false;
+        var io2 = new IntersectionObserver(function (entries) {
+          if (!readSeen && entries[0].isIntersecting) {
+            readSeen = true; goal('article_read', { page: location.pathname }); io2.disconnect();
+          }
+        }, { threshold: 1 });
+        io2.observe(end);
+      }
+    })();
+  </script>
 </body>
 </html>

@@ -36,6 +36,7 @@
       const h = history(); h.unshift(rec);
       localStorage.setItem(LS_HIST, JSON.stringify(h.slice(0, 10)));
     } catch (e) {}
+    try { if (window.dbGoal) window.dbGoal('test_done', { test: T.id }); } catch (e) {}
   }
 
   function el(html) { const d = document.createElement('div'); d.innerHTML = html; return d.firstElementChild; }
