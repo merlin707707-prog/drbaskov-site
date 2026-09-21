@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "og": "python tools/make-og.py"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.2.1",

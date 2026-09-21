@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { getCollection, render } from 'astro:content';
+import fs from 'node:fs';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog', ({ data }) => !data.draft);
@@ -10,8 +11,13 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 const fmt = (d: Date) => d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+
+// индивидуальная обложка для превью ссылок; если файла нет — общая /og.jpg
+// обложки генерируются скриптом tools/make-og.py
+const ogPath = `/og/${post.id}.jpg`;
+const ogImage = fs.existsSync(new URL(`../../../public${ogPath}`, import.meta.url)) ? ogPath : undefined;
 ---
-<Base title={`${post.data.title} — Владислав Басков`} description={post.data.description}>
+<Base title={`${post.data.title} — Владислав Басков`} description={post.data.description} image={ogImage}>
   <div class="page-head wrap prose">
     <div class="meta">{fmt(post.data.date)}{post.data.tags.length > 0 && ` · ${post.data.tags.join(' · ')}`}</div>
     <h1>{post.data.title}</h1>
