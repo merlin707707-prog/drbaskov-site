@@ -4,9 +4,15 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description?: string;
+  image?: string;
 }
 const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '';
-const { title, description = 'Владислав Басков — врач-психотерапевт. КПТ и схематерапия, юнгианский анализ, гипнотерапия. Приём в Москве и онлайн.' } = Astro.props;
+const { title, description = 'Владислав Басков — врач-психотерапевт. КПТ и схематерапия, юнгианский анализ, гипнотерапия. Приём в Москве и онлайн.', image } = Astro.props;
+
+const SITE = Astro.site ?? new URL('https://drbaskov.ru');
+const canonical = new URL(Astro.url.pathname, SITE).href;
+const ogImage = new URL(image ?? '/og.jpg', SITE).href;
+const isArticle = /^\/blog\/.+/.test(Astro.url.pathname);
 
 const schema = {
   '@context': 'https://schema.org',
@@ -29,11 +35,22 @@ const schema = {
   <title>{title}</title>
   <meta name="description" content={description} />
   <meta name="yandex-verification" content="676e1bec091e05c6" />
-  <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+  <link rel="canonical" href={canonical} />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
-  <meta property="og:type" content="website" />
+  <meta property="og:type" content={isArticle ? 'article' : 'website'} />
   <meta property="og:locale" content="ru_RU" />
+  <meta property="og:site_name" content="Владислав Басков — врач-психотерапевт" />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:alt" content="Владислав Басков — врач-психиатр, психотерапевт" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
   <link rel="sitemap" href="/sitemap-index.xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet" />
