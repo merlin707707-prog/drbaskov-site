@@ -1,0 +1,49 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { collectTags, slugifyTag } from '../../../utils/tags';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return collectTags(posts).map((tag) => ({
+    params: { tag: tag.slug },
+    props: {
+      tagName: tag.name,
+      posts: posts
+        .filter((p) => p.data.tags.includes(tag.name))
+        .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+    }
+  }));
+}
+
+const { tagName, posts } = Astro.props;
+const fmt = (d: Date) => d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+const word = (n: number) => {
+  const d = n % 10, h = n % 100;
+  if (d === 1 && h !== 11) return 'статья';
+  if (d >= 2 && d <= 4 && (h < 12 || h > 14)) return 'статьи';
+  return 'статей';
+};
+---
+<Base
+  title={`${tagName} — статьи — Владислав Басков`}
+  description={`Статьи по теме «${tagName}» — врач-психиатр, психотерапевт Владислав Басков.`}
+>
+  <div class="page-head wrap">
+    <div class="eyebrow"><a href="/blog/" style="color:inherit;text-decoration:none">← Все статьи</a></div>
+    <h2 class="title">{tagName}</h2>
+    <p class="sub">{posts.length} {word(posts.length)} по этой теме.</p>
+  </div>
+  <div class="wrap" style="padding-bottom:96px">
+    <div class="post-list">
+      {posts.map((post) => (
+        <a class="post-item" href={`/blog/${post.id}/`}>
+          <div class="meta">{fmt(post.data.date)}</div>
+          <h3>{post.data.title}</h3>
+          {post.data.description && <p>{post.data.description}</p>}
+        </a>
+      ))}
+    </div>
+    <p style="margin-top:48px"><a class="btn" href="/blog/">Все статьи</a></p>
+  </div>
+</Base>

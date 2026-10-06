@@ -1,16 +1,19 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { getCollection, render } from 'astro:content';
+import { slugifyTag, relatedPosts } from '../../utils/tags';
 import fs from 'node:fs';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog', ({ data }) => !data.draft);
-  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post, posts } }));
 }
 
-const { post } = Astro.props;
+const { post, posts } = Astro.props;
 const { Content } = await render(post);
 const fmt = (d: Date) => d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+
+const related = relatedPosts(post, posts, 3);
 
 // индивидуальная обложка для превью ссылок; если файла нет — общая /og.jpg
 // обложки генерируются скриптом tools/make-og.py
@@ -19,11 +22,38 @@ const ogImage = fs.existsSync(new URL(`../../../public${ogPath}`, import.meta.ur
 ---
 <Base title={`${post.data.title} — Владислав Басков`} description={post.data.description} image={ogImage}>
   <div class="page-head wrap prose">
-    <div class="meta">{fmt(post.data.date)}{post.data.tags.length > 0 && ` · ${post.data.tags.join(' · ')}`}</div>
+    <div class="meta">{fmt(post.data.date)}</div>
     <h1>{post.data.title}</h1>
   </div>
   <article class="wrap prose">
     <Content />
-    <p style="margin-top:48px"><a class="btn" href="/#contact">Записаться на приём</a></p>
+
+    {post.data.tags.length > 0 && (
+      <div class="tag-cloud" style="margin-top:48px">
+        {post.data.tags.map((t) => (
+          <a class="tag-chip" href={`/blog/tag/${slugifyTag(t)}/`}>{t}</a>
+        ))}
+      </div>
+    )}
+
+    <p style="margin-top:40px"><a class="btn" href="/#contact">Записаться на приём</a></p>
   </article>
+
+  {related.length > 0 && (
+    <section class="alt">
+      <div class="wrap">
+        <div class="eyebrow">Читайте также</div>
+        <div class="post-list" style="margin-top:28px">
+          {related.map((p) => (
+            <a class="post-item" href={`/blog/${p.id}/`}>
+              <div class="meta">{fmt(p.data.date)}</div>
+              <h3>{p.data.title}</h3>
+              {p.data.description && <p>{p.data.description}</p>}
+            </a>
+          ))}
+        </div>
+        <p style="margin-top:36px"><a class="btn" href="/blog/">Все статьи</a></p>
+      </div>
+    </section>
+  )}
 </Base>

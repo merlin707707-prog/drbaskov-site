@@ -1,9 +1,12 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { getCollection } from 'astro:content';
+import { collectTags } from '../../utils/tags';
 
 const posts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const tags = collectTags(posts).filter((t) => t.count >= 2);
 
 const fmt = (d: Date) => d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
 ---
@@ -11,8 +14,17 @@ const fmt = (d: Date) => d.toLocaleDateString('ru-RU', { day: 'numeric', month: 
   <div class="page-head wrap">
     <div class="eyebrow">Блог</div>
     <h2 class="title">Мои статьи с тегом psycho</h2>
-    <p class="sub">О том, как устроена психика, и что с этим делать.</p>
+    <p class="sub">О том, как устроена психика, и что с этим делать. {posts.length} статей — ниже можно выбрать тему.</p>
   </div>
+
+  <div class="wrap">
+    <div class="tag-cloud">
+      {tags.map((t) => (
+        <a class="tag-chip" href={`/blog/tag/${t.slug}/`}>{t.name}<span>{t.count}</span></a>
+      ))}
+    </div>
+  </div>
+
   <div class="wrap" style="padding-bottom:96px">
     <div class="post-list">
       {posts.map((post) => (
