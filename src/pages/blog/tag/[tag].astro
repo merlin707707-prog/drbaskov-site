@@ -1,11 +1,11 @@
 ---
 import Base from '../../../layouts/Base.astro';
 import { getCollection } from 'astro:content';
-import { collectTags, slugifyTag } from '../../../utils/tags';
+import { tagsWithPages } from '../../../utils/tags';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog', ({ data }) => !data.draft);
-  return collectTags(posts).map((tag) => ({
+  return tagsWithPages(posts).map((tag) => ({
     params: { tag: tag.slug },
     props: {
       tagName: tag.name,

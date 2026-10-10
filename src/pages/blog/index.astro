@@ -14,7 +14,10 @@ const fmt = (d: Date) => d.toLocaleDateString('ru-RU', { day: 'numeric', month: 
   <div class="page-head wrap">
     <div class="eyebrow">Блог</div>
     <h2 class="title">Мои статьи с тегом psycho</h2>
-    <p class="sub">О том, как устроена психика, и что с этим делать. {posts.length} статей — ниже можно выбрать тему.</p>
+    <p class="sub">
+      О том, как устроена психика, и что с этим делать. Статей здесь уже {posts.length} —
+      если не знаете, с чего начать, посмотрите <a href="/podborki/" style="color:var(--gold)">подборки по ситуациям</a>.
+    </p>
   </div>
 
   <div class="wrap">

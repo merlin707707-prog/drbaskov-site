@@ -29,6 +29,13 @@ export function collectTags(posts: PostLike[]) {
     .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name, 'ru'));
 }
 
+/** Теги, для которых имеет смысл отдельная страница (минимум MIN статей). */
+export const MIN_POSTS_PER_TAG = 2;
+
+export function tagsWithPages(posts: PostLike[]) {
+  return collectTags(posts).filter((t) => t.count >= MIN_POSTS_PER_TAG);
+}
+
 /** Похожие статьи: сначала по числу общих тегов, затем по свежести. */
 export function relatedPosts<T extends { id: string; data: { tags: string[]; date: Date } }>(
   current: T,
@@ -36,11 +43,23 @@ export function relatedPosts<T extends { id: string; data: { tags: string[]; dat
   limit = 3
 ): T[] {
   const tags = new Set(current.data.tags);
-  return all
-    .filter((p) => p.id !== current.id)
+  const others = all.filter((p) => p.id !== current.id);
+
+  const byTags = others
     .map((p) => ({ post: p, shared: p.data.tags.filter((t) => tags.has(t)).length }))
     .filter((x) => x.shared > 0)
     .sort((a, b) => b.shared - a.shared || b.post.data.date.valueOf() - a.post.data.date.valueOf())
     .slice(0, limit)
     .map((x) => x.post);
+
+  if (byTags.length >= limit) return byTags;
+
+  // добираем свежими, если общих тегов не хватило
+  const have = new Set(byTags.map((p) => p.id));
+  const recent = others
+    .filter((p) => !have.has(p.id))
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+    .slice(0, limit - byTags.length);
+
+  return [...byTags, ...recent];
 }

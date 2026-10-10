@@ -1,0 +1,65 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { podborki } from '../../data/podborki';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  const byId = new Map(posts.map((p) => [p.id, p]));
+
+  return podborki.map((p) => ({
+    params: { slug: p.slug },
+    props: {
+      podborka: p,
+      items: p.items
+        .map((it) => ({ note: it.note, post: byId.get(it.slug) }))
+        .filter((x) => x.post)
+    }
+  }));
+}
+
+const { podborka, items } = Astro.props;
+const others = podborki.filter((p) => p.slug !== podborka.slug).slice(0, 4);
+---
+<Base
+  title={`${podborka.title} — подборка статей — Владислав Басков`}
+  description={podborka.lead}
+>
+  <div class="page-head wrap">
+    <div class="eyebrow"><a href="/podborki/" style="color:inherit;text-decoration:none">← Все подборки</a></div>
+    <h2 class="title">{podborka.title}</h2>
+    <p class="sub">{podborka.intro}</p>
+  </div>
+
+  <div class="wrap" style="padding-bottom:64px">
+    <div class="post-list">
+      {items.map((x, i) => (
+        <a class="post-item" href={`/blog/${x.post.id}/`}>
+          <div class="meta">{String(i + 1).padStart(2, '0')}</div>
+          <h3>{x.post.data.title}</h3>
+          <p>{x.note}</p>
+        </a>
+      ))}
+    </div>
+
+    <p style="margin-top:48px">
+      <a class="btn solid" href="/#contact">Записаться на приём</a>
+      <a class="btn" href="/blog/" style="margin-left:12px">Все статьи</a>
+    </p>
+  </div>
+
+  <section class="alt">
+    <div class="wrap">
+      <div class="eyebrow">Другие подборки</div>
+      <div class="post-list" style="margin-top:28px">
+        {others.map((p) => (
+          <a class="post-item" href={`/podborki/${p.slug}/`}>
+            <div class="meta">{p.items.length} статей</div>
+            <h3>{p.title}</h3>
+            <p>{p.lead}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>

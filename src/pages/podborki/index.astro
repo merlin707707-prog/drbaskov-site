@@ -1,0 +1,34 @@
+---
+import Base from '../../layouts/Base.astro';
+import { podborki } from '../../data/podborki';
+---
+<Base
+  title="С чего начать читать — подборки статей — Владислав Басков"
+  description="Подборки статей по ситуациям: развод, тревога и паника, трудное детство, измена, психосоматика, кризис середины жизни. Что читать, если вы в такой ситуации."
+>
+  <div class="page-head wrap">
+    <div class="eyebrow">Подборки</div>
+    <h2 class="title">С чего начать</h2>
+    <p class="sub">
+      Статей на сайте много, и выбрать из общего списка трудно. Здесь они собраны по ситуациям —
+      в том порядке, в каком их имеет смысл читать.
+    </p>
+  </div>
+
+  <div class="wrap" style="padding-bottom:96px">
+    <div class="post-list">
+      {podborki.map((p) => (
+        <a class="post-item" href={`/podborki/${p.slug}/`}>
+          <div class="meta">{p.items.length} статей</div>
+          <h3>{p.title}</h3>
+          <p>{p.lead}</p>
+        </a>
+      ))}
+    </div>
+
+    <p class="sub" style="margin-top:48px">
+      Не нашли своей темы? Посмотрите <a href="/blog/" style="color:var(--gold)">полный список статей</a>
+      или <a href="/tests/" style="color:var(--gold)">психологические тесты</a>.
+    </p>
+  </div>
+</Base>
