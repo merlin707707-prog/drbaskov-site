@@ -147,7 +147,8 @@ export const podborki: Podborka[] = [
       { slug: 'dikie-serdcem-yungianskiy-analiz', note: '«Дикие сердцем»: бегство, которое принимают за свободу.' },
       { slug: 'twin-peaks-1-yungianskiy-analiz', note: '«Твин Пикс», сезон 1: город с безупречным фасадом и та, кто несла его тень.' },
       { slug: 'twin-peaks-2-yungianskiy-analiz', note: 'Сезон 2: разгадка получена — и стало хуже. Почему так бывает и в терапии.' },
-      { slug: 'twin-peaks-3-yungianskiy-analiz', note: '«Возвращение»: что было бы, если бы травму удалось отменить.' }
+      { slug: 'twin-peaks-3-yungianskiy-analiz', note: '«Возвращение»: что было бы, если бы травму удалось отменить.' },
+      { slug: 'zakoldovannaya-ella-yungianskiy-analiz', note: '«Заколдованная Элла»: проклятие, которое все считают хорошим воспитанием.' }
     ]
   },
   {
