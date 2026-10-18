@@ -149,7 +149,8 @@ export const podborki: Podborka[] = [
       { slug: 'twin-peaks-2-yungianskiy-analiz', note: 'Сезон 2: разгадка получена — и стало хуже. Почему так бывает и в терапии.' },
       { slug: 'twin-peaks-3-yungianskiy-analiz', note: '«Возвращение»: что было бы, если бы травму удалось отменить.' },
       { slug: 'zakoldovannaya-ella-yungianskiy-analiz', note: '«Заколдованная Элла»: проклятие, которое все считают хорошим воспитанием.' },
-      { slug: 'zakoldovannaya-ella-shematerapiya', note: 'Она же глазами схематерапевта: схема подчинения и где сказка врёт.' }
+      { slug: 'zakoldovannaya-ella-shematerapiya', note: 'Она же глазами схематерапевта: схема подчинения и где сказка врёт.' },
+      { slug: 'devid-linch-psihologicheskiy-portret', note: 'И напоследок — портрет режиссёра, снявшего половину этой подборки.' }
     ]
   },
   {
