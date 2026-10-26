@@ -24,7 +24,8 @@ export const podborki: Podborka[] = [
       { slug: 'posle-razvoda-ruminacii-obida', note: 'Если в браке была агрессия и после развода стало тяжелее, а не легче.' },
       { slug: 'terapiya-posle-razvoda-sluchay', note: 'Если вас оставили ради другого человека: разбор случая.' },
       { slug: 'druzhba-s-byvshim-muzhem', note: 'Если развелись, но он остался главным человеком в вашей жизни.' },
-      { slug: 'kompleks-zavisimosti', note: 'Если не получается перестать цепляться за ушедшего.' }
+      { slug: 'kompleks-zavisimosti', note: 'Если не получается перестать цепляться за ушедшего.' },
+      { slug: 'zhizn-s-narcissom-pochemu-ne-uhoditsya', note: 'Если вы ещё не ушли и не понимаете, почему не получается.' }
     ]
   },
   {
@@ -50,11 +51,13 @@ export const podborki: Podborka[] = [
       'Самая частая причина, по которой люди годами не обращаются, — не стоимость и не нехватка времени, а непонимание, что будет происходить и чем это грозит. Эта подборка отвечает на такие вопросы по порядку.',
     items: [
       { slug: 'psihiatr-psihoterapevt-psiholog-k-komu-idti', note: 'Чем они отличаются и кто вам нужен.' },
+      { slug: 'psihiatricheskiy-uchet-mify', note: 'Про «учёт»: чего на самом деле стоит опасаться, а чего нет.' },
       { slug: 'pervaya-konsultaciya', note: 'Что именно происходит на первой встрече.' },
       { slug: 'antidepressanty-strah-i-pravda', note: 'Пять главных страхов о лекарствах и что из них правда.' },
       { slug: 'naznachili-antidepressant-chto-delat', note: 'Если назначение уже на руках, а начать не решаетесь.' },
       { slug: 'otmena-antidepressantov', note: 'Сколько принимать и как правильно заканчивать.' },
-      { slug: 'mne-postavili-diagnoz', note: 'Что делать в первые недели после постановки диагноза.' }
+      { slug: 'mne-postavili-diagnoz', note: 'Что делать в первые недели после постановки диагноза.' },
+      { slug: 'bipolyarnoe-vmesto-depressii-sluchay', note: 'Если лечат годами, а «ничего не помогает»: возможно, диагноз другой.' }
     ]
   },
   {
