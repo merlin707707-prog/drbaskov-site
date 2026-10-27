@@ -51,7 +51,9 @@ export const podborki: Podborka[] = [
       'Самая частая причина, по которой люди годами не обращаются, — не стоимость и не нехватка времени, а непонимание, что будет происходить и чем это грозит. Эта подборка отвечает на такие вопросы по порядку.',
     items: [
       { slug: 'psihiatr-psihoterapevt-psiholog-k-komu-idti', note: 'Чем они отличаются и кто вам нужен.' },
+      { slug: 'kogda-nuzhen-vrach-a-ne-psiholog', note: 'Десять признаков, что одних разговоров недостаточно.' },
       { slug: 'psihiatricheskiy-uchet-mify', note: 'Про «учёт»: чего на самом деле стоит опасаться, а чего нет.' },
+      { slug: 'pervyy-priem-u-psihiatra', note: 'Первый приём по минутам: что спросят и чего точно не будет.' },
       { slug: 'pervaya-konsultaciya', note: 'Что именно происходит на первой встрече.' },
       { slug: 'antidepressanty-strah-i-pravda', note: 'Пять главных страхов о лекарствах и что из них правда.' },
       { slug: 'naznachili-antidepressant-chto-delat', note: 'Если назначение уже на руках, а начать не решаетесь.' },
