@@ -156,6 +156,7 @@ export const podborki: Podborka[] = [
       { slug: 'twin-peaks-3-yungianskiy-analiz', note: '«Возвращение»: что было бы, если бы травму удалось отменить.' },
       { slug: 'zakoldovannaya-ella-yungianskiy-analiz', note: '«Заколдованная Элла»: проклятие, которое все считают хорошим воспитанием.' },
       { slug: 'zakoldovannaya-ella-shematerapiya', note: 'Она же глазами схематерапевта: схема подчинения и где сказка врёт.' },
+      { slug: 'sonnaya-loschina-yungianskiy-analiz', note: '«Сонная лощина»: голова без тела против тела без головы.' },
       { slug: 'devid-linch-psihologicheskiy-portret', note: 'И напоследок — портрет режиссёра, снявшего половину этой подборки.' }
     ]
   },
