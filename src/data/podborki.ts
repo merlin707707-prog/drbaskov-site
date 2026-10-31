@@ -52,6 +52,7 @@ export const podborki: Podborka[] = [
     items: [
       { slug: 'psihiatr-psihoterapevt-psiholog-k-komu-idti', note: 'Чем они отличаются и кто вам нужен.' },
       { slug: 'kogda-nuzhen-vrach-a-ne-psiholog', note: 'Десять признаков, что одних разговоров недостаточно.' },
+      { slug: 'proverte-telo-pered-terapiey', note: 'Что исключить до психотерапии: щитовидка, ферритин, B12, апноэ.' },
       { slug: 'psihiatricheskiy-uchet-mify', note: 'Про «учёт»: чего на самом деле стоит опасаться, а чего нет.' },
       { slug: 'pervyy-priem-u-psihiatra', note: 'Первый приём по минутам: что спросят и чего точно не будет.' },
       { slug: 'pervaya-konsultaciya', note: 'Что именно происходит на первой встрече.' },
@@ -179,6 +180,7 @@ export const podborki: Podborka[] = [
     intro:
       'Тексты, написанные скорее для специалистов, чем для клиентов: о том, как разные подходы формируют человека, чем отличаются их критерии успеха и где заканчивается компетенция психолога.',
     items: [
+      { slug: 'krasnye-flagi-dlya-psihologov', note: 'Когда направлять клиента к врачу и как сказать, чтобы он дошёл.' },
       { slug: 'kem-vy-vyydete-iz-terapii', note: 'Как шесть методов формируют идентичность клиента.' },
       { slug: 'chto-znachit-vylechilsya', note: 'Два портрета результата: «лучше» и «полнее» — не одно и то же.' },
       { slug: 'kompleks-ili-shema', note: 'Схематерапия и анализ об одном явлении: где спорят по существу.' },
