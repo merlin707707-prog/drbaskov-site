@@ -158,6 +158,7 @@ export const podborki: Podborka[] = [
       { slug: 'zakoldovannaya-ella-shematerapiya', note: 'Она же глазами схематерапевта: схема подчинения и где сказка врёт.' },
       { slug: 'sonnaya-loschina-yungianskiy-analiz', note: '«Сонная лощина»: голова без тела против тела без головы.' },
       { slug: 'penny-dreadful-yungianskiy-analiz', note: '«Страшные сказки»: монстром делает отвержение, а не природа.' },
+      { slug: 'angel-a-yungianskiy-analiz', note: '«Ангел-А»: сцена у зеркала и почему «полюби себя» не работает.' },
       { slug: 'devid-linch-psihologicheskiy-portret', note: 'И напоследок — портрет режиссёра, снявшего половину этой подборки.' }
     ]
   },
