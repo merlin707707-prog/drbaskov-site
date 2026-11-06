@@ -159,6 +159,7 @@ export const podborki: Podborka[] = [
       { slug: 'sonnaya-loschina-yungianskiy-analiz', note: '«Сонная лощина»: голова без тела против тела без головы.' },
       { slug: 'penny-dreadful-yungianskiy-analiz', note: '«Страшные сказки»: монстром делает отвержение, а не природа.' },
       { slug: 'angel-a-yungianskiy-analiz', note: '«Ангел-А»: сцена у зеркала и почему «полюби себя» не работает.' },
+      { slug: 'trup-nevesty-yungianskiy-analiz', note: '«Труп невесты»: горе в свадебном платье и клятва, данная по ошибке.' },
       { slug: 'devid-linch-psihologicheskiy-portret', note: 'И напоследок — портрет режиссёра, снявшего половину этой подборки.' }
     ]
   },

@@ -158,9 +158,32 @@
     ];
   }
 
+  /* Общие bands теста обычно рассчитаны на полный балл. Если их применить
+     к короткой подшкале, все результаты попадут в первый диапазон.
+     В этом случае пороги пересчитываются пропорционально диапазону подшкалы
+     (подписи сохраняются). Шкала со своими bands не трогается. */
+  function fitBands(bands, min, max) {
+    if (min == null || max == null || max <= min) return bands;
+    const finite = bands.filter(function (b) { return isFinite(b.max) && b.max < 900; });
+    if (!finite.length) return bands;
+    if (finite[0].max < max) return bands;            // пороги укладываются — всё в порядке
+    const map = T.valueMap || null;
+    const uMax = map ? Math.max.apply(null, map) : VMAX;
+    const uMin = map ? Math.min.apply(null, map) : VS;
+    const n = (T.items || []).length || 1;
+    const tMin = SUM ? uMin * n : uMin, tMax = SUM ? uMax * n : uMax;
+    if (tMax <= tMin) return bands;
+    return bands.map(function (b, i) {
+      if (!isFinite(b.max) || b.max >= 900 || i === bands.length - 1) return b;
+      const t = min + (b.max - tMin) / (tMax - tMin) * (max - min);
+      return Object.assign({}, b, { max: Math.round(t * 100) / 100 });
+    });
+  }
+
   function band(mean, positive, custom, min, max) {
-    const bands = custom || T.bands ||
-      autoBands(min == null ? (SUM ? 0 : VS) : min, max == null ? VMAX : max);
+    const bands = custom ? custom
+      : (T.bands ? fitBands(T.bands, min, max)
+                 : autoBands(min == null ? (SUM ? 0 : VS) : min, max == null ? VMAX : max));
     for (const b of bands) { if (mean < b.max) return positive ? (b.pos || b) : b; }
     const last = bands[bands.length - 1];
     return positive ? (last.pos || last) : last;
