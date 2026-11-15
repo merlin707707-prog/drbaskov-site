@@ -55,6 +55,7 @@ export const podborki: Podborka[] = [
       { slug: 'proverte-telo-pered-terapiey', note: 'Что исключить до психотерапии: щитовидка, ферритин, B12, апноэ.' },
       { slug: 'psihiatricheskiy-uchet-mify', note: 'Про «учёт»: чего на самом деле стоит опасаться, а чего нет.' },
       { slug: 'pervyy-priem-u-psihiatra', note: 'Первый приём по минутам: что спросят и чего точно не будет.' },
+      { slug: 'skolko-dlitsya-terapiya', note: 'Сколько это займёт: когда хватит десяти встреч, а когда нужны годы.' },
       { slug: 'pervaya-konsultaciya', note: 'Что именно происходит на первой встрече.' },
       { slug: 'antidepressanty-strah-i-pravda', note: 'Пять главных страхов о лекарствах и что из них правда.' },
       { slug: 'naznachili-antidepressant-chto-delat', note: 'Если назначение уже на руках, а начать не решаетесь.' },
