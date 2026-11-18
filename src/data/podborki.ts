@@ -165,6 +165,8 @@ export const podborki: Podborka[] = [
       { slug: 'korolevskiy-roman-razbor', note: '«Королевский роман»: врач, перешедший границу, и цена для всех троих.' },
       { slug: 'grozovoy-pereval-shematerapiya', note: '«Грозовой перевал»: слияние вместо любви и цикл, который прерывается.' },
       { slug: 'grozovoy-pereval-yungianskiy-analiz', note: 'Он же глазами Юнга: два дома, Тень под полой плаща и сны, которые не услышали.' },
+      { slug: 'pobeg-iz-shoushenka-yungianskiy-analiz', note: '«Побег из Шоушенка»: стены, к которым привыкают, и путь через трубу под дождь.' },
+      { slug: 'pobeg-iz-shoushenka-shematerapiya', note: 'Он же глазами схематерапевта: почему Брукс не выжил, а Ред выжил.' },
       { slug: 'devid-linch-psihologicheskiy-portret', note: 'И напоследок — портрет режиссёра, снявшего половину этой подборки.' }
     ]
   },
