@@ -167,6 +167,8 @@ export const podborki: Podborka[] = [
       { slug: 'grozovoy-pereval-yungianskiy-analiz', note: 'Он же глазами Юнга: два дома, Тень под полой плаща и сны, которые не услышали.' },
       { slug: 'pobeg-iz-shoushenka-yungianskiy-analiz', note: '«Побег из Шоушенка»: стены, к которым привыкают, и путь через трубу под дождь.' },
       { slug: 'pobeg-iz-shoushenka-shematerapiya', note: 'Он же глазами схематерапевта: почему Брукс не выжил, а Ред выжил.' },
+      { slug: 'tyudory-shematerapiya', note: '«Тюдоры»: что бывает с человеком, которому никто не говорил «нет».' },
+      { slug: 'tyudory-yungianskiy-analiz', note: 'Они же глазами Юнга: инфляция власти и казни собственной Тени.' },
       { slug: 'devid-linch-psihologicheskiy-portret', note: 'И напоследок — портрет режиссёра, снявшего половину этой подборки.' }
     ]
   },
